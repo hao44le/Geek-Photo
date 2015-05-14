@@ -1,0 +1,13 @@
+PODS:
+  - BKAsciiImage (0.1.1)
+  - GPUImage (0.1.6)
+
+DEPENDENCIES:
+  - BKAsciiImage
+  - GPUImage (~> 0.1)
+
+SPEC CHECKSUMS:
+  BKAsciiImage: 9d672106097b74c937dd8a5ed24bfa0fb8d549b1
+  GPUImage: 4675ce4a5370ca92fcea8623b2a08b8f0c51b940
+
+COCOAPODS: 0.36.4
