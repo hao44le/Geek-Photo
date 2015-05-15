@@ -18,6 +18,8 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
     @IBOutlet weak var downView: UIView!{
         didSet{
             downView.backgroundColor = UIColor(white: 0.9, alpha: 0.8)
+
+            
         }
     }
 
@@ -41,9 +43,40 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
     var inputImage = UIImage(named: "testImage.png")
     var thumbnailImage = UIImage(named: "thumbnail.jpg")
     let converter = BKAsciiConverter()
+    @IBOutlet weak var rightView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imageView.contentMode = .ScaleAspectFit
+        if (self.view.bounds.size.height < 420) {
+            imageView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
+            rightView.frame = CGRectMake(self.view.bounds.size.width-199, 0, 199, 150)
+            downView.frame = CGRectMake(0, self.view.bounds.height-150, self.view.bounds.size.width, 150)
+            
+            //6 plus
+        } else if (self.view.bounds.size.height == 736) {
+            imageView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 736)
+            rightView.frame = CGRectMake(self.view.bounds.size.width-199, 0, 199, 150)
+            downView.frame = CGRectMake(0, self.view.bounds.height-150, self.view.bounds.size.width, 150)
+            // 6
+        } else if (self.view.bounds.size.height == 667) {
+            imageView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 667)
+            rightView.frame = CGRectMake(self.view.bounds.size.width-199, 0, 199, 150)
+            downView.frame = CGRectMake(0, 518, self.view.bounds.size.width, 150)
+            // 5s / 5
+        } else if (self.view.bounds.size.height == 568) {
+            downView.frame = CGRectMake(0, 418, 320, 150)
+            // 4s
+        } else if (self.view.bounds.size.height == 480) {
+            imageView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
+            rightView.frame = CGRectMake(self.view.bounds.size.width-199, 0, 199, 150)
+            downView.frame = CGRectMake(0, self.view.bounds.height-150, self.view.bounds.size.width, 150)
+            // ipad
+        } else {
+            imageView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
+            rightView.frame = CGRectMake(self.view.bounds.size.width-199, 0, 199, 150)
+            downView.frame = CGRectMake(0, self.view.bounds.height-150, self.view.bounds.size.width, 150)
+        }
+
+        //self.imageView.contentMode = .ScaleAspectFit
         self.imageView.image = self.inputImage
         self.fontSizeSlider.value = Float(self.converter.font.pointSize)
         self.pickImageButton.imageView?.contentMode = .ScaleAspectFit
