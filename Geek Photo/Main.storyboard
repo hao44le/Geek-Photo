@@ -109,6 +109,7 @@
                         <outlet property="imageView" destination="cac-1d-85f" id="qpH-k4-jJX"/>
                         <outlet property="pickImageButton" destination="QGo-Xz-sSg" id="B4r-6P-IbF"/>
                         <outlet property="rightView" destination="Dbb-rS-ra6" id="ZZK-ID-IeI"/>
+                        <segue destination="4Dg-Du-bxs" kind="custom" identifier="toPopup" customClass="CCMPopupSegue" id="eRG-qf-swI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -133,9 +134,106 @@
             </objects>
             <point key="canvasLocation" x="913" y="-437"/>
         </scene>
+        <!--Menu View Controller-->
+        <scene sceneID="qDE-bz-Q92">
+            <objects>
+                <viewController storyboardIdentifier="popupController" extendedLayoutIncludesOpaqueBars="YES" id="4Dg-Du-bxs" customClass="MenuViewController" customModule="Geek_Photo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1f1-Ax-tNo" customClass="CCMBorderView">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="oDY-Bq-8ig">
+                                <rect key="frame" x="8" y="209" width="284" height="183"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fNF-wZ-C5Q">
+                                    <size key="itemSize" width="70" height="70"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="5GF-w9-uOS" customClass="CollectionViewCell" customModule="Geek_Photo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Twitter" id="NZb-RI-0wm">
+                                                    <rect key="frame" x="21" y="0.0" width="39" height="38"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fL9-1k-VOh">
+                                                    <rect key="frame" x="8" y="36" width="58" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="imageView" destination="NZb-RI-0wm" id="c9S-he-fZc"/>
+                                            <outlet property="label" destination="fL9-1k-VOh" id="ibe-jQ-osp"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="4Dg-Du-bxs" id="PkP-7S-j3G"/>
+                                    <outlet property="delegate" destination="4Dg-Du-bxs" id="9cN-XS-5hR"/>
+                                </connections>
+                            </collectionView>
+                            <view contentMode="scaleToFill" id="aB2-6E-jJa">
+                                <rect key="frame" x="8" y="198" width="273" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d7g-3e-0hk">
+                                <rect key="frame" x="113" y="3" width="75" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="top" id="kPO-KL-0WH">
+                                <rect key="frame" x="69" y="40" width="150" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="300" height="400"/>
+                    <connections>
+                        <outlet property="collectionView" destination="oDY-Bq-8ig" id="NW7-R9-Z3V"/>
+                        <outlet property="topImageView" destination="kPO-KL-0WH" id="FWL-ON-taA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HhU-vr-1N0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="uXm-GR-UwC" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="D9t-gF-4vT">
+                    <connections>
+                        <segue destination="uXm-GR-UwC" kind="unwind" unwindAction="didDismissSegue:" id="pf8-02-eM2"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1963" y="-483"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Twitter" width="300" height="300"/>
         <image name="testImage" width="720" height="1280"/>
+        <image name="top" width="950" height="950"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

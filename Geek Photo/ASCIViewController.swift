@@ -18,19 +18,9 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
     @IBOutlet weak var downView: UIView!{
         didSet{
             downView.backgroundColor = UIColor(white: 0.9, alpha: 0.8)
-
-            
         }
     }
 
-    @IBOutlet weak var scrollView: UIScrollView!{
-        didSet {
-            scrollView.contentSize = CGSizeMake((UIScreen.mainScreen().bounds.size.height), UIScreen.mainScreen().bounds.size.height)
-            scrollView.delegate = self
-            scrollView.minimumZoomScale = 1.0
-            scrollView.maximumZoomScale = 1.0
-        }
-    }
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pickImageButton: UIButton!
     @IBOutlet weak var fontSizeSlider: UISlider!{
@@ -40,12 +30,28 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
     }
     @IBOutlet weak var fontSizeLabel: UILabel!
    
-    var inputImage = UIImage(named: "testImage.png")
-    var thumbnailImage = UIImage(named: "thumbnail.jpg")
-    let converter = BKAsciiConverter()
+
+    
     @IBOutlet weak var rightView: UIView!
+    
+    
+    var inputImage = UIImage(named: "testImage.png")
+    let converter = BKAsciiConverter()
+    var pickFromCamera = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.boolForKey("imageExist"){
+            println("Image exists")
+            loadImageFromDisk()
+        } else {
+            println("Image does not exist")
+            self.imageView.image = self.inputImage
+        }
+        
         if (self.view.bounds.size.height < 420) {
             imageView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
             rightView.frame = CGRectMake(self.view.bounds.size.width-199, 0, 199, 150)
@@ -76,8 +82,8 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
             downView.frame = CGRectMake(0, self.view.bounds.height-150, self.view.bounds.size.width, 150)
         }
 
-        //self.imageView.contentMode = .ScaleAspectFit
-        self.imageView.image = self.inputImage
+        self.imageView.contentMode = .ScaleAspectFit
+       
         self.fontSizeSlider.value = Float(self.converter.font.pointSize)
         self.pickImageButton.imageView?.contentMode = .ScaleAspectFit
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "save.png"), style: UIBarButtonItemStyle.Plain, target: self, action: "saveImage:")
@@ -86,9 +92,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.blackColor()
         self.navigationController!.navigationBar.translucent = true
-        self.title = "Code image"
-        
-        
+        self.title = "Geek Photo"
     }
     
     override func didReceiveMemoryWarning() {
@@ -149,8 +153,8 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
                         UIImagePickerControllerSourceType.Camera
                     imagePicker.cameraDevice = UIImagePickerControllerCameraDevice.Front
                     //imagePicker.mediaTypes = [kUTTypeImage as NSString]
-                    imagePicker.allowsEditing = false
-                    
+                    imagePicker.allowsEditing = true
+                    self.pickFromCamera = true
                     self.presentViewController(imagePicker, animated: true, 
                         completion: nil)
             } else {
@@ -189,7 +193,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
        
     }
     @IBAction func convert(sender: UIButton) {
-        
+        writeImageToDisk()
         converter.convertImage(self.inputImage, completionHandler: { (asciImage:UIImage?) -> Void in
             UIView.transitionWithView(self.imageView, duration: 1.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
                 self.imageView.image = asciImage!
@@ -198,6 +202,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
         converter.convertToString(self.inputImage, completionHandler: { (asciString:String?) -> Void in
             
         })
+        
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
@@ -216,6 +221,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
         UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, Selector("image:didFinishSavingWithError:contextInfo:"), nil)
     }
     func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo: UnsafePointer<()>) {
+        writeImageToDisk()
         if error != nil {
             let alert = AMSmoothAlertView(dropAlertWithTitle: "Sorry!", andText: "\(error.debugDescription)", andCancelButton: false, forAlertType: AlertType.Failure)
             alert.show()
@@ -232,84 +238,78 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
             dispatch_after(time, dispatch_get_main_queue(), {
                 alert.dismissAlertView()
             })
+            
         }
         
     }
     
     func shareToWeChat(sender: UIButton!){
-       let alert = UIAlertController(title: "Share", message: "Share this face with your WeChat Friends!", preferredStyle: UIAlertControllerStyle.Alert)
-        let friend = UIAlertAction(title: "Friend", style: UIAlertActionStyle.Default) { (_) -> Void in
-            self.shareToWeChatFriend()
-        }
-        let moments = UIAlertAction(title: "Moments", style: UIAlertActionStyle.Default) { (_) -> Void in
-            self.shareToWeChatTimeline()
-        }
-
-        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Destructive) { (_) -> Void in
+        self.performSegueWithIdentifier("toPopup", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toPopup"{
+            let dvc = segue.destinationViewController as! MenuViewController
+            dvc.imageView = self.imageView
+            let popupSegue = segue as! CCMPopupSegue
+            
+            
+            if (self.view.bounds.size.height < 420) {
+                
+                popupSegue.destinationBounds = CGRectMake(0, 0, 300, 400)
+                //6 plus
+            } else if (self.view.bounds.size.height == 736) {
+                popupSegue.destinationBounds = CGRectMake(0, 0, (UIScreen.mainScreen().bounds.size.height-200) * 0.7, UIScreen.mainScreen().bounds.size.height-250)
+                // 6
+            } else if (self.view.bounds.size.height == 667) {
+                popupSegue.destinationBounds = CGRectMake(0, 0, (UIScreen.mainScreen().bounds.size.height-150) * 0.65, UIScreen.mainScreen().bounds.size.height-200)
+                // 5s / 5
+            } else if (self.view.bounds.size.height == 568) {
+                popupSegue.destinationBounds = CGRectMake(0, 0, (UIScreen.mainScreen().bounds.size.height-150) * 0.7, UIScreen.mainScreen().bounds.size.height-200)
+                // 4s
+            } else if (self.view.bounds.size.height == 480) {
+                popupSegue.destinationBounds = CGRectMake(0, 0, (UIScreen.mainScreen().bounds.size.height-100) * 0.7, UIScreen.mainScreen().bounds.size.height-150)
+                // ipad
+            } else {
+                popupSegue.destinationBounds = CGRectMake(0, 0, (UIScreen.mainScreen().bounds.size.height-100) * 0.7, UIScreen.mainScreen().bounds.size.height-150)
+            }
+            popupSegue.backgroundBlurRadius = 7
+            popupSegue.backgroundViewAlpha = 0.3
+            popupSegue.backgroundViewColor = UIColor.blackColor()
+            popupSegue.dismissableByTouchingBackground = true
             
         }
-        alert.addAction(friend)
-        alert.addAction(moments)
-        alert.addAction(cancel)
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-    func shareToWeChatTimeline(){
-        var req = SendMessageToWXReq()
-        req.scene = Int32(WXSceneTimeline.value)
-        req.bText = false
-        let media = WXMediaMessage()
-        let img = WXImageObject()
-        img.imageData = UIImageJPEGRepresentation(imageView.image, 1.0)
-        media.mediaObject = img
-        req.message = media
-        WXApi.sendReq(req)
-        
-    }
-    func shareToWeChatFriend(){
-        var req = SendMessageToWXReq()
-        req.scene = Int32(WXSceneSession.value)
-        req.bText = false
-        let media = WXMediaMessage()
-        media.title = "代码图片"
-        media.description = "把图片变成代码"
-        media.setThumbImage(self.thumbnailImage)
-        let img = WXImageObject()
-        img.imageData = UIImageJPEGRepresentation(imageView.image, 1.0)
-        media.mediaObject = img
-        req.message = media
-        WXApi.sendReq(req)
-        
-    }
-    func shareToInstagram(){
-        let imageData = UIImageJPEGRepresentation(imageView.image, 1.0)
-        
-    }
-    
-
-    /*
-    func uploadImageToParse(image:UIImage){
-        let imageFile = PFFile(data: UIImagePNGRepresentation(image))
-        println(imageFile.url)
-        var userPhoto = PFObject(className:"UserPhoto")
-        userPhoto["imageName"] = "My trip to Hawaii!"
-        userPhoto["imageFile"] = imageFile
-        userPhoto.saveInBackground()
-    }
-    func shareToFacebook(sender: UIButton!){
-        let shareActionSheet = UIActionSheet()
         
     }
 
-    func getShareLinkContentWithContentURL(url:NSURL)->FBSDKShareLinkContent{
-        let content = FBSDKShareLinkContent()
-        content.contentURL = url
-        return content
+    
+    func writeImageToDisk(){
+        let savePath = NSHomeDirectory().stringByAppendingPathComponent("Documents/userImage.png")
+        if pickFromCamera{
+            /*
+            let rotatedImage = UIImageView(image: self.imageView.image)
+            rotatedImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2))
+            UIImagePNGRepresentation(rotatedImage.image).writeToFile(savePath, atomically: true)
+            */
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setBool(false, forKey: "imageExist")
+        } else {
+            UIImagePNGRepresentation(self.imageView?.image).writeToFile(savePath, atomically: true)
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setBool(true, forKey: "imageExist")
+        }
+        
+
+        
     }
-    func getShareDialogWithContentURL(url:NSURL)->FBSDKShareDialog{
-        let shareDialog = FBSDKShareDialog()
-        shareDialog.shareContent = self.getShareLinkContentWithContentURL(url)
-        return shareDialog
-    }*/
+    func loadImageFromDisk(){
+        let jpgPath = NSHomeDirectory().stringByAppendingPathComponent("Documents/userImage.png")
+        self.imageView.image = UIImage(contentsOfFile: jpgPath)
+        self.pickImageButton.setImage(UIImage(contentsOfFile: jpgPath), forState: UIControlState.Normal)
+    }
+            
+
+    }
+
     
-    
-}
+

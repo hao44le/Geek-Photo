@@ -9,3 +9,6 @@
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import "AMSmoothAlertView.h"
 #import "AMSmoothAlertConstants.h"
+#import "CCMPopupSegue.h"
+#import "CCMBorderView.h"
+#import "CCMPopupTransitioning.h"

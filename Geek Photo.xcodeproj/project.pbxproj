@@ -10,6 +10,7 @@
 		915CBC5986D93333DD997502 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3676A9ECA6FDC27A0FB58990 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C06C81001B026FEC00C27E7B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C06C80FF1B026FEC00C27E7B /* FBSDKCoreKit.framework */; };
 		C06C81041B02700F00C27E7B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C06C81031B02700F00C27E7B /* FBSDKShareKit.framework */; };
+		C076484A1B06E31C003261A2 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07648491B06E31C003261A2 /* CollectionViewCell.swift */; };
 		C0A679251B05328E0051BA56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0A679241B05328E0051BA56 /* Main.storyboard */; };
 		C0A679331B0543860051BA56 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C0A679321B0543860051BA56 /* libstdc++.6.dylib */; };
 		C0A679351B05438E0051BA56 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0A679341B05438E0051BA56 /* MobileCoreServices.framework */; };
@@ -17,6 +18,16 @@
 		C0A679391B0543A20051BA56 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C0A679381B0543A20051BA56 /* libsqlite3.dylib */; };
 		C0A6793A1B0546A00051BA56 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0F4137C1B0244F50068F18C /* Social.framework */; };
 		C0A6793B1B0546AF0051BA56 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0F4137E1B0244FC0068F18C /* Accounts.framework */; };
+		C0A6797B1B057C740051BA56 /* CCMBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A679671B057C740051BA56 /* CCMBorderView.m */; };
+		C0A6797C1B057C740051BA56 /* CCMCustomAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A679691B057C740051BA56 /* CCMCustomAnimation.m */; };
+		C0A6797D1B057C740051BA56 /* CCMPopupAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A6796B1B057C740051BA56 /* CCMPopupAnimation.m */; };
+		C0A6797E1B057C740051BA56 /* CCMPopupSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A6796D1B057C740051BA56 /* CCMPopupSegue.m */; };
+		C0A6797F1B057C740051BA56 /* CCMPopupTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A6796F1B057C740051BA56 /* CCMPopupTransitioning.m */; };
+		C0A679801B057C740051BA56 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A679721B057C740051BA56 /* FXBlurView.m */; };
+		C0A679811B057C740051BA56 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A679751B057C740051BA56 /* UIImage+ImageEffects.m */; };
+		C0A679821B057C740051BA56 /* UIImage+screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A679781B057C740051BA56 /* UIImage+screenshot.m */; };
+		C0A679831B057C740051BA56 /* UIViewController+CCMPopupAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A6797A1B057C740051BA56 /* UIViewController+CCMPopupAnimation.m */; };
+		C0A679851B057C9F0051BA56 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A679841B057C9F0051BA56 /* MenuViewController.swift */; };
 		C0D04BB41B043E1A008040E8 /* AMBouncingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0D04BA91B043E1A008040E8 /* AMBouncingView.m */; };
 		C0D04BB51B043E1A008040E8 /* AMSmoothAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0D04BAC1B043E1A008040E8 /* AMSmoothAlertView.m */; };
 		C0D04BB61B043E1A008040E8 /* checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = C0D04BAE1B043E1A008040E8 /* checkMark.png */; };
@@ -57,11 +68,31 @@
 		8CEF8F7CADC26D767BA8762A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C06C80FF1B026FEC00C27E7B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		C06C81031B02700F00C27E7B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		C07648491B06E31C003261A2 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		C0A679241B05328E0051BA56 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C0A679321B0543860051BA56 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		C0A679341B05438E0051BA56 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		C0A679361B05439C0051BA56 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C0A679381B0543A20051BA56 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		C0A679661B057C740051BA56 /* CCMBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMBorderView.h; sourceTree = "<group>"; };
+		C0A679671B057C740051BA56 /* CCMBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMBorderView.m; sourceTree = "<group>"; };
+		C0A679681B057C740051BA56 /* CCMCustomAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMCustomAnimation.h; sourceTree = "<group>"; };
+		C0A679691B057C740051BA56 /* CCMCustomAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMCustomAnimation.m; sourceTree = "<group>"; };
+		C0A6796A1B057C740051BA56 /* CCMPopupAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMPopupAnimation.h; sourceTree = "<group>"; };
+		C0A6796B1B057C740051BA56 /* CCMPopupAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMPopupAnimation.m; sourceTree = "<group>"; };
+		C0A6796C1B057C740051BA56 /* CCMPopupSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMPopupSegue.h; sourceTree = "<group>"; };
+		C0A6796D1B057C740051BA56 /* CCMPopupSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMPopupSegue.m; sourceTree = "<group>"; };
+		C0A6796E1B057C740051BA56 /* CCMPopupTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMPopupTransitioning.h; sourceTree = "<group>"; };
+		C0A6796F1B057C740051BA56 /* CCMPopupTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMPopupTransitioning.m; sourceTree = "<group>"; };
+		C0A679711B057C740051BA56 /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
+		C0A679721B057C740051BA56 /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
+		C0A679741B057C740051BA56 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		C0A679751B057C740051BA56 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		C0A679771B057C740051BA56 /* UIImage+screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+screenshot.h"; sourceTree = "<group>"; };
+		C0A679781B057C740051BA56 /* UIImage+screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+screenshot.m"; sourceTree = "<group>"; };
+		C0A679791B057C740051BA56 /* UIViewController+CCMPopupAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CCMPopupAnimation.h"; sourceTree = "<group>"; };
+		C0A6797A1B057C740051BA56 /* UIViewController+CCMPopupAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CCMPopupAnimation.m"; sourceTree = "<group>"; };
+		C0A679841B057C9F0051BA56 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		C0D04BA81B043E1A008040E8 /* AMBouncingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBouncingView.h; sourceTree = "<group>"; };
 		C0D04BA91B043E1A008040E8 /* AMBouncingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBouncingView.m; sourceTree = "<group>"; };
 		C0D04BAA1B043E1A008040E8 /* AMSmoothAlertConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSmoothAlertConstants.h; sourceTree = "<group>"; };
@@ -182,6 +213,55 @@
 			name = Facebook_SDK;
 			sourceTree = "<group>";
 		};
+		C0A679651B057C740051BA56 /* CCMPopup */ = {
+			isa = PBXGroup;
+			children = (
+				C0A679661B057C740051BA56 /* CCMBorderView.h */,
+				C0A679671B057C740051BA56 /* CCMBorderView.m */,
+				C0A679681B057C740051BA56 /* CCMCustomAnimation.h */,
+				C0A679691B057C740051BA56 /* CCMCustomAnimation.m */,
+				C0A6796A1B057C740051BA56 /* CCMPopupAnimation.h */,
+				C0A6796B1B057C740051BA56 /* CCMPopupAnimation.m */,
+				C0A6796C1B057C740051BA56 /* CCMPopupSegue.h */,
+				C0A6796D1B057C740051BA56 /* CCMPopupSegue.m */,
+				C0A6796E1B057C740051BA56 /* CCMPopupTransitioning.h */,
+				C0A6796F1B057C740051BA56 /* CCMPopupTransitioning.m */,
+				C0A679701B057C740051BA56 /* FXBlurView */,
+				C0A679731B057C740051BA56 /* UIImage+ImageEffects */,
+				C0A679761B057C740051BA56 /* UIImage+screenshot */,
+				C0A679791B057C740051BA56 /* UIViewController+CCMPopupAnimation.h */,
+				C0A6797A1B057C740051BA56 /* UIViewController+CCMPopupAnimation.m */,
+			);
+			path = CCMPopup;
+			sourceTree = "<group>";
+		};
+		C0A679701B057C740051BA56 /* FXBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				C0A679711B057C740051BA56 /* FXBlurView.h */,
+				C0A679721B057C740051BA56 /* FXBlurView.m */,
+			);
+			path = FXBlurView;
+			sourceTree = "<group>";
+		};
+		C0A679731B057C740051BA56 /* UIImage+ImageEffects */ = {
+			isa = PBXGroup;
+			children = (
+				C0A679741B057C740051BA56 /* UIImage+ImageEffects.h */,
+				C0A679751B057C740051BA56 /* UIImage+ImageEffects.m */,
+			);
+			path = "UIImage+ImageEffects";
+			sourceTree = "<group>";
+		};
+		C0A679761B057C740051BA56 /* UIImage+screenshot */ = {
+			isa = PBXGroup;
+			children = (
+				C0A679771B057C740051BA56 /* UIImage+screenshot.h */,
+				C0A679781B057C740051BA56 /* UIImage+screenshot.m */,
+			);
+			path = "UIImage+screenshot";
+			sourceTree = "<group>";
+		};
 		C0D04BA71B043E1A008040E8 /* AMSmoothAlert */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +315,8 @@
 				C0F4135D1B0243290068F18C /* AppDelegate.swift */,
 				C0F413611B0243320068F18C /* ASCIViewController.swift */,
 				C0F4135F1B02432E0068F18C /* CGRect+Extension.swift */,
+				C0A679841B057C9F0051BA56 /* MenuViewController.swift */,
+				C07648491B06E31C003261A2 /* CollectionViewCell.swift */,
 				C0F413331B0242B70068F18C /* Supporting Files */,
 			);
 			path = "Geek Photo";
@@ -301,6 +383,7 @@
 		C0F4138D1B024B3B0068F18C /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				C0A679651B057C740051BA56 /* CCMPopup */,
 				C0D04BA71B043E1A008040E8 /* AMSmoothAlert */,
 				C06C81051B02704200C27E7B /* Facebook_SDK */,
 				C0F413551B0242C70068F18C /* WeChatSDK_1.5 */,
@@ -468,11 +551,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0F413621B0243320068F18C /* ASCIViewController.swift in Sources */,
+				C0A679811B057C740051BA56 /* UIImage+ImageEffects.m in Sources */,
+				C076484A1B06E31C003261A2 /* CollectionViewCell.swift in Sources */,
+				C0A679831B057C740051BA56 /* UIViewController+CCMPopupAnimation.m in Sources */,
 				C0D04BB51B043E1A008040E8 /* AMSmoothAlertView.m in Sources */,
 				C0F4135E1B0243290068F18C /* AppDelegate.swift in Sources */,
 				C0F4136A1B0243BE0068F18C /* UIImage+BKAscii.m in Sources */,
+				C0A6797F1B057C740051BA56 /* CCMPopupTransitioning.m in Sources */,
+				C0A679851B057C9F0051BA56 /* MenuViewController.swift in Sources */,
+				C0A679801B057C740051BA56 /* FXBlurView.m in Sources */,
 				C0F413601B02432E0068F18C /* CGRect+Extension.swift in Sources */,
+				C0A6797D1B057C740051BA56 /* CCMPopupAnimation.m in Sources */,
+				C0A679821B057C740051BA56 /* UIImage+screenshot.m in Sources */,
+				C0A6797C1B057C740051BA56 /* CCMCustomAnimation.m in Sources */,
 				C0D04BB41B043E1A008040E8 /* AMBouncingView.m in Sources */,
+				C0A6797E1B057C740051BA56 /* CCMPopupSegue.m in Sources */,
+				C0A6797B1B057C740051BA56 /* CCMBorderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
