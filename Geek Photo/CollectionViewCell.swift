@@ -9,7 +9,8 @@
 import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
-    
+    var height:CGFloat = 0
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    
 }

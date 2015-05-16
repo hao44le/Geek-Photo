@@ -143,29 +143,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="oDY-Bq-8ig">
-                                <rect key="frame" x="8" y="209" width="284" height="183"/>
+                                <rect key="frame" x="0.0" y="209" width="292" height="183"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fNF-wZ-C5Q">
-                                    <size key="itemSize" width="70" height="70"/>
+                                    <size key="itemSize" width="65" height="65"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="5GF-w9-uOS" customClass="CollectionViewCell" customModule="Geek_Photo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Twitter" id="NZb-RI-0wm">
-                                                    <rect key="frame" x="21" y="0.0" width="39" height="38"/>
+                                                    <rect key="frame" x="13" y="0.0" width="39" height="38"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fL9-1k-VOh">
-                                                    <rect key="frame" x="8" y="36" width="58" height="34"/>
+                                                    <rect key="frame" x="3" y="36" width="58" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -216,6 +216,8 @@
                     <size key="freeformSize" width="300" height="400"/>
                     <connections>
                         <outlet property="collectionView" destination="oDY-Bq-8ig" id="NW7-R9-Z3V"/>
+                        <outlet property="seperatorView" destination="aB2-6E-jJa" id="QEH-T5-Dhg"/>
+                        <outlet property="shareLabel" destination="d7g-3e-0hk" id="cVJ-ck-Ruv"/>
                         <outlet property="topImageView" destination="kPO-KL-0WH" id="FWL-ON-taA"/>
                     </connections>
                 </viewController>

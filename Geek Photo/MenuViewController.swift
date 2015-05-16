@@ -8,7 +8,7 @@
 
 import UIKit
 import Social
-class MenuViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource{
+class MenuViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
 
     var dic :UIDocumentInteractionController?
     let thumbnailImage = UIImage(named: "thumbnail.jpg")
@@ -17,11 +17,44 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
     let cellName = ["Facebook","Twitter","WeChat Moment","WeChat Friend","Sina Weibo","Tencent Weibo","Tencent QQ","Tencent Qzone"]
     override func viewDidLoad() {
          super.viewDidLoad()
+        if (self.view.bounds.size.height < 420) {
+            
         
+        //6 plus
+        } else if (self.view.bounds.size.height == 736) {
+            self.seperatorView.frame = CGRectMake(8, 250, 360, 1)
+            self.topImageView.frame = CGRectMake(110, 50, 170, 170)
+            self.shareLabel.frame = CGRectMake(150, 3, 75, 29)
+            self.collectionView.frame = CGRectMake(40, 270, 400,400)
+            // 6
+        } else if (self.view.bounds.size.height == 667) {
+           self.seperatorView.frame = CGRectMake(8, 210, 320, 1)
+            self.topImageView.frame = CGRectMake(95, 40, 150, 150)
+            self.shareLabel.frame = CGRectMake(130, 3, 75, 29)
+            self.collectionView.frame = CGRectMake(20, 250, 367,350)
+            
+            // 5s / 5
+        } else if (self.view.bounds.size.height == 568) {
+           
+            // 4s
+        } else if (self.view.bounds.size.height == 480) {
+            self.seperatorView.frame = CGRectMake(8, 150, 270, 1)
+            self.topImageView.frame = CGRectMake(90, 25, 120, 120)
+            self.shareLabel.frame = CGRectMake(120, 3, 75, 20)
+            self.collectionView.frame = CGRectMake(0, 170, 367,300)
+            // ipad
+        } else {
+           
+        }
+
         
         // Do any additional setup after loading the view.
     }
 
+
+
+    @IBOutlet weak var seperatorView: UIView!
+    @IBOutlet weak var shareLabel: UILabel!
     @IBOutlet weak var topImageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     override func didReceiveMemoryWarning() {
@@ -30,9 +63,12 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
         cell.label.text = cellName[indexPath.row]
         cell.imageView.image = UIImage(named: cellName[indexPath.row])
+        cell.height = self.view.bounds.size.height
+        
         return cell
     }
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -43,19 +79,73 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        shareToWeChatFriend()
-    }
-    
-    @IBAction func click(sender: AnyObject) {
-        
-        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
-            shareToInstagram()
-        } else {
-            unableToShare()
+        switch indexPath.row{
+        case 0:
+            if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
+                shareToFacebook()
+            } else {
+                unableToShare()
+            }
+            
+        case 1:
+            if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){
+                shareToTwitter()
+            } else {
+                unableToShare()
+            }
+        case 2:
+            //moments
+            shareToWeChatTimeline()
+        case 3:
+            //friend
+            shareToWeChatFriend()
+        case 4:
+            //sina weibo
+            if SLComposeViewController.isAvailableForServiceType(SLServiceTypeSinaWeibo){
+                shareToSinaWeibo()
+            } else {
+                unableToShare()
+            }
+        case 5:
+            //tencent weibo
+            if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTencentWeibo){
+                shareToTencentWeibo()
+            } else {
+                unableToShare()
+            }
+        case 6:
+            //tencent qq
+            shareToQQ()
+        case 7:
+            //tencent qzone
+            shareToQzone()
+        default:break
         }
-        
     }
-    
+    func collectionView(collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
+            if (self.view.bounds.size.height < 420) {
+                return CGSize(width: 65, height: 65)
+                
+                //6 plus
+            } else if (self.view.bounds.size.height == 736) {
+                return CGSize(width: 65, height: 65)
+                // 6
+            } else if (self.view.bounds.size.height == 667) {
+                return CGSize(width: 80, height: 80)
+                // 5s / 5
+            } else if (self.view.bounds.size.height == 568) {
+                return CGSize(width: 65, height: 65)
+                // 4s
+            } else if (self.view.bounds.size.height == 480) {
+                return CGSize(width: 65, height: 65)
+                // ipad
+            } else {
+                return CGSize(width: 65, height: 65)
+            }
+
+    }
     func unableToShare(){
         let alert = AMSmoothAlertView(dropAlertWithTitle: "Sorry!", andText: "Fail to share. You can try agian.", andCancelButton: false, forAlertType: AlertType.Failure)
         alert.show()
@@ -69,36 +159,21 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
     
     
     func shareToTwitter(){
-        let string = "test iOS twitter share"
+        let string = "I just create this cool code image. You can try one yourself. It's avaliable on App Store. It's called Geek Photo"
         slvc = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
         self.slvc!.addImage(imageView?.image)
         self.slvc!.setInitialText(string)
         self.presentViewController(slvc!, animated: true, completion: nil)
-        
-        let alert = AMSmoothAlertView(dropAlertWithTitle: "Success!", andText: "You have successfully shared the image on twitter!", andCancelButton: false, forAlertType: AlertType.Success)
-        alert.show()
-        let delay = 2.0 * Double(NSEC_PER_SEC)
-        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            alert.dismissAlertView()
-        })
+
 
     }
     
     func shareToFacebook(){
-        let string = "test iOS facebook share"
+        let string = "I just create this cool code image. You can try one yourself. It's avaliable on App Store. It's called Geek Photo"
         slvc = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
         self.slvc!.addImage(imageView?.image)
         self.slvc!.setInitialText(string)
         self.presentViewController(slvc!, animated: true, completion: nil)
-        
-        let alert = AMSmoothAlertView(dropAlertWithTitle: "Success!", andText: "You have successfully shared the image on facebook!", andCancelButton: false, forAlertType: AlertType.Success)
-        alert.show()
-        let delay = 2.0 * Double(NSEC_PER_SEC)
-        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            alert.dismissAlertView()
-        })
     }
     
     func shareToWeChatTimeline(){
@@ -112,13 +187,7 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
         req.message = media
         WXApi.sendReq(req)
         
-        let alert = AMSmoothAlertView(dropAlertWithTitle: "Success!", andText: "You have successfully shared the image on WeChat Moments!", andCancelButton: false, forAlertType: AlertType.Success)
-        alert.show()
-        let delay = 2.0 * Double(NSEC_PER_SEC)
-        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            alert.dismissAlertView()
-        })
+
         
     }
     func shareToWeChatFriend(){
@@ -134,46 +203,26 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
         media.mediaObject = img
         req.message = media
         WXApi.sendReq(req)
-        
-        let alert = AMSmoothAlertView(dropAlertWithTitle: "Success!", andText: "You have successfully shared the image to your WeChat Friend!", andCancelButton: false, forAlertType: AlertType.Success)
-        alert.show()
-        let delay = 2.0 * Double(NSEC_PER_SEC)
-        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            alert.dismissAlertView()
-        })
+
         
     }
     func shareToSinaWeibo(){
-        let string = "test iOS Sina Weibo share"
+        let string = "I just create this cool code image. You can try one yourself. It's avaliable on App Store. It's called Geek Photo"
         slvc = SLComposeViewController(forServiceType: SLServiceTypeSinaWeibo)
         self.slvc!.addImage(imageView?.image)
         self.slvc!.setInitialText(string)
         self.presentViewController(slvc!, animated: true, completion: nil)
         
-        let alert = AMSmoothAlertView(dropAlertWithTitle: "Success!", andText: "You have successfully shared the image to your Sina Weibo!", andCancelButton: false, forAlertType: AlertType.Success)
-        alert.show()
-        let delay = 2.0 * Double(NSEC_PER_SEC)
-        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            alert.dismissAlertView()
-        })
     }
     
     func shareToTencentWeibo(){
-        let string = "test iOS Tencent Weibo share"
+        let string = "I just create this cool code image. You can try one yourself. It's avaliable on App Store. It's called Geek Photo"
         slvc = SLComposeViewController(forServiceType: SLServiceTypeTencentWeibo)
         self.slvc!.addImage(imageView?.image)
         self.slvc!.setInitialText(string)
         self.presentViewController(slvc!, animated: true, completion: nil)
         
-        let alert = AMSmoothAlertView(dropAlertWithTitle: "Success!", andText: "You have successfully shared the image to your Tencent Weibo!", andCancelButton: false, forAlertType: AlertType.Success)
-        alert.show()
-        let delay = 2.0 * Double(NSEC_PER_SEC)
-        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            alert.dismissAlertView()
-        })
+
     }
     func shareToQQ(){
         
