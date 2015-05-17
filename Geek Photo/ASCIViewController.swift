@@ -11,10 +11,14 @@ import BKAsciiImage
 import AVFoundation
 import QuartzCore
 
-class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIScrollViewDelegate,UIAccelerometerDelegate{
+class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIScrollViewDelegate,UIAccelerometerDelegate,EAIntroDelegate{
 
 
-
+    func introDidFinish(introView: EAIntroView!) {
+        println("finish")
+    }
+    
+    
     @IBOutlet weak var downView: UIView!{
         didSet{
             downView.backgroundColor = UIColor(white: 0.9, alpha: 0.8)
@@ -29,9 +33,6 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
         }
     }
     @IBOutlet weak var fontSizeLabel: UILabel!
-   
-
-    
     @IBOutlet weak var rightView: UIView!
     
     
@@ -39,18 +40,20 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
     let converter = BKAsciiConverter()
     var pickFromCamera = false
     
-    
-    override func viewDidLoad() {
+        override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         
         let defaults = NSUserDefaults.standardUserDefaults()
         if defaults.boolForKey("imageExist"){
-            println("Image exists")
             loadImageFromDisk()
         } else {
-            println("Image does not exist")
             self.imageView.image = self.inputImage
         }
+        
+               
         
         if (self.view.bounds.size.height < 420) {
             imageView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
@@ -188,18 +191,18 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
     
     func imagePickerDidSelectImage(image: UIImage!) {
         self.imageView.image = image
-        self.inputImage = image
+        //self.inputImage = image
         self.pickImageButton.setImage(image, forState: UIControlState.Normal)
        
     }
     @IBAction func convert(sender: UIButton) {
         writeImageToDisk()
-        converter.convertImage(self.inputImage, completionHandler: { (asciImage:UIImage?) -> Void in
+        converter.convertImage(self.imageView.image, completionHandler: { (asciImage:UIImage?) -> Void in
             UIView.transitionWithView(self.imageView, duration: 1.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
                 self.imageView.image = asciImage!
             }, completion: nil)
         })
-        converter.convertToString(self.inputImage, completionHandler: { (asciString:String?) -> Void in
+        converter.convertToString(self.imageView.image, completionHandler: { (asciString:String?) -> Void in
             
         })
         
@@ -212,7 +215,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
         
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         self.imageView.image = chosenImage
-        self.inputImage = chosenImage
+        //self.inputImage = chosenImage
         self.pickImageButton.setImage(chosenImage, forState: UIControlState.Normal)
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -259,7 +262,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
                 popupSegue.destinationBounds = CGRectMake(0, 0, 300, 400)
                 //6 plus
             } else if (self.view.bounds.size.height == 736) {
-                popupSegue.destinationBounds = CGRectMake(0, 0, (UIScreen.mainScreen().bounds.size.height-200) * 0.7, UIScreen.mainScreen().bounds.size.height-250)
+                popupSegue.destinationBounds = CGRectMake(0, 0, (UIScreen.mainScreen().bounds.size.height-200) * 0.6, UIScreen.mainScreen().bounds.size.height-260)
                 // 6
             } else if (self.view.bounds.size.height == 667) {
                 popupSegue.destinationBounds = CGRectMake(0, 0, (UIScreen.mainScreen().bounds.size.height-150) * 0.65, UIScreen.mainScreen().bounds.size.height-200)
@@ -286,11 +289,6 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
     func writeImageToDisk(){
         let savePath = NSHomeDirectory().stringByAppendingPathComponent("Documents/userImage.png")
         if pickFromCamera{
-            /*
-            let rotatedImage = UIImageView(image: self.imageView.image)
-            rotatedImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2))
-            UIImagePNGRepresentation(rotatedImage.image).writeToFile(savePath, atomically: true)
-            */
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setBool(false, forKey: "imageExist")
         } else {

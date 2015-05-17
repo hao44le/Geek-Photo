@@ -12,3 +12,4 @@
 #import "CCMPopupSegue.h"
 #import "CCMBorderView.h"
 #import "CCMPopupTransitioning.h"
+#import "EAIntroView.h"

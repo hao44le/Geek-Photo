@@ -22,16 +22,16 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
         
         //6 plus
         } else if (self.view.bounds.size.height == 736) {
-            self.seperatorView.frame = CGRectMake(8, 250, 360, 1)
-            self.topImageView.frame = CGRectMake(110, 50, 170, 170)
-            self.shareLabel.frame = CGRectMake(150, 3, 75, 29)
-            self.collectionView.frame = CGRectMake(40, 270, 400,400)
+            self.seperatorView.frame = CGRectMake(8, 270, 360, 1)
+            self.topImageView.frame = CGRectMake(60, 50, 210, 210)
+            self.shareLabel.frame = CGRectMake(130, 7, 75, 29)
+            self.collectionView.frame = CGRectMake(17, 300, 400,400)
             // 6
         } else if (self.view.bounds.size.height == 667) {
-           self.seperatorView.frame = CGRectMake(8, 210, 320, 1)
-            self.topImageView.frame = CGRectMake(95, 40, 150, 150)
-            self.shareLabel.frame = CGRectMake(130, 3, 75, 29)
-            self.collectionView.frame = CGRectMake(20, 250, 367,350)
+           self.seperatorView.frame = CGRectMake(8, 240, 320, 1)
+            self.topImageView.frame = CGRectMake(78, 40, 190, 190)
+            self.shareLabel.frame = CGRectMake(132, 3, 75, 29)
+            self.collectionView.frame = CGRectMake(20, 280, 367,350)
             
             // 5s / 5
         } else if (self.view.bounds.size.height == 568) {
@@ -84,34 +84,44 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
             if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
                 shareToFacebook()
             } else {
-                unableToShare()
+                unableToShare("Facebook")
             }
             
         case 1:
             if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){
                 shareToTwitter()
             } else {
-                unableToShare()
+                unableToShare("Twitter")
             }
         case 2:
             //moments
-            shareToWeChatTimeline()
+            if WXApi.isWXAppInstalled() {
+                shareToWeChatTimeline()
+            } else {
+                unableToShare("WeChat")
+            }
+            
         case 3:
             //friend
-            shareToWeChatFriend()
+            if WXApi.isWXAppInstalled(){
+                shareToWeChatFriend()
+            } else {
+                unableToShare("WeChat")
+            }
+            
         case 4:
             //sina weibo
             if SLComposeViewController.isAvailableForServiceType(SLServiceTypeSinaWeibo){
                 shareToSinaWeibo()
             } else {
-                unableToShare()
+                unableToShare("Sina Weibo")
             }
         case 5:
             //tencent weibo
             if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTencentWeibo){
                 shareToTencentWeibo()
             } else {
-                unableToShare()
+                unableToShare("Tencent Weibo")
             }
         case 6:
             //tencent qq
@@ -146,8 +156,8 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
             }
 
     }
-    func unableToShare(){
-        let alert = AMSmoothAlertView(dropAlertWithTitle: "Sorry!", andText: "Fail to share. You can try agian.", andCancelButton: false, forAlertType: AlertType.Failure)
+    func unableToShare(name:String){
+        let alert = AMSmoothAlertView(dropAlertWithTitle: "Sorry!", andText: "Make sure you install \(name), and log in \(name).", andCancelButton: false, forAlertType: AlertType.Failure)
         alert.show()
         let delay = 2.0 * Double(NSEC_PER_SEC)
         var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
@@ -246,7 +256,7 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
         if UIApplication.sharedApplication().canOpenURL(instagramURL!){
             self.dic?.presentOpenInMenuFromRect(rect, inView: self.view, animated: true)
         } else {
-            unableToShare()
+            unableToShare("Instagram")
         }
     
     }
