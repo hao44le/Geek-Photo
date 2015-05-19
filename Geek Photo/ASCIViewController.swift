@@ -19,6 +19,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
     }
     
     
+
     @IBOutlet weak var downView: UIView!{
         didSet{
             downView.backgroundColor = UIColor(white: 0.9, alpha: 0.8)
@@ -39,11 +40,18 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
     var inputImage = UIImage(named: "testImage.png")
     let converter = BKAsciiConverter()
     var pickFromCamera = false
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+    let overlayView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
+    
     
         override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
+            overlayView.frame = UIScreen.mainScreen().bounds
+        activityIndicator.frame = CGRectMake(self.view.frame.size.width/2, self.view.frame.size.height/2, 15, 15)
+        overlayView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+        self.activityIndicator.center = overlayView.center
+            overlayView.addSubview(activityIndicator)
+            
         
         
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -205,7 +213,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
        
     }
     @IBAction func convert(sender: UIButton) {
-        
+
         converter.convertImage(self.inputImage, completionHandler: { (asciImage:UIImage?) -> Void in
             UIView.transitionWithView(self.imageView, duration: 1.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
                 self.imageView.image = asciImage!
@@ -233,9 +241,13 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
     
     func saveImage(sender: UIButton!){
         UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, Selector("image:didFinishSavingWithError:contextInfo:"), nil)
+        
+        self.view.addSubview(overlayView)
+        activityIndicator.startAnimating()
     }
     func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo: UnsafePointer<()>) {
-        
+        overlayView.removeFromSuperview()
+        activityIndicator.stopAnimating()
         if error != nil {
             let alert = AMSmoothAlertView(dropAlertWithTitle: "Sorry!", andText: "\(error.debugDescription)", andCancelButton: false, forAlertType: AlertType.Failure)
             alert.show()
