@@ -13,3 +13,5 @@
 #import "CCMBorderView.h"
 #import "CCMPopupTransitioning.h"
 #import "EAIntroView.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>

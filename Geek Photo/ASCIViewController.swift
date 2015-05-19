@@ -43,18 +43,24 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
         override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+       
         
         
         let defaults = NSUserDefaults.standardUserDefaults()
+        
         if defaults.boolForKey("imageExist"){
             loadImageFromDisk()
         } else {
             self.imageView.image = self.inputImage
         }
+            
+        if defaults.boolForKey("pickFromCamera"){
+                    loadImageFromDisk()
+        } else {
+                
+        }
         
-               
-        
+    
         if (self.view.bounds.size.height < 420) {
             imageView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
             rightView.frame = CGRectMake(self.view.bounds.size.width-199, 0, 199, 150)
@@ -132,6 +138,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
                 picker.allowsEditing = true
                 picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
                 self.presentViewController(picker, animated: true, completion: nil)
+                
             } else {
                 let alert = AMSmoothAlertView(dropAlertWithTitle: "Sorry!", andText: "Can not open Photo Albums", andCancelButton: false, forAlertType: AlertType.Failure)
                 alert.show()
@@ -140,6 +147,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
                 dispatch_after(time, dispatch_get_main_queue(), {
                     alert.dismissAlertView()
                 })
+               
             }
             
         }
@@ -191,13 +199,14 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
     
     func imagePickerDidSelectImage(image: UIImage!) {
         self.imageView.image = image
-        //self.inputImage = image
-        self.pickImageButton.setImage(image, forState: UIControlState.Normal)
+        self.inputImage = image
+        self.writeImageToDisk()
+        //self.pickImageButton.setImage(image, forState: UIControlState.Normal)
        
     }
     @IBAction func convert(sender: UIButton) {
-        writeImageToDisk()
-        converter.convertImage(self.imageView.image, completionHandler: { (asciImage:UIImage?) -> Void in
+        
+        converter.convertImage(self.inputImage, completionHandler: { (asciImage:UIImage?) -> Void in
             UIView.transitionWithView(self.imageView, duration: 1.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
                 self.imageView.image = asciImage!
             }, completion: nil)
@@ -205,6 +214,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
         converter.convertToString(self.imageView.image, completionHandler: { (asciString:String?) -> Void in
             
         })
+        writeImageToDisk()
         
     }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -215,8 +225,9 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
         
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         self.imageView.image = chosenImage
-        //self.inputImage = chosenImage
-        self.pickImageButton.setImage(chosenImage, forState: UIControlState.Normal)
+        self.inputImage = chosenImage
+        self.writeImageToDisk()
+        //self.pickImageButton.setImage(chosenImage, forState: UIControlState.Normal)
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -224,7 +235,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
         UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, Selector("image:didFinishSavingWithError:contextInfo:"), nil)
     }
     func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo: UnsafePointer<()>) {
-        writeImageToDisk()
+        
         if error != nil {
             let alert = AMSmoothAlertView(dropAlertWithTitle: "Sorry!", andText: "\(error.debugDescription)", andCancelButton: false, forAlertType: AlertType.Failure)
             alert.show()
@@ -241,8 +252,9 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
             dispatch_after(time, dispatch_get_main_queue(), {
                 alert.dismissAlertView()
             })
-            
+             writeImageToDisk()
         }
+       
         
     }
     
@@ -285,25 +297,26 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
         
     }
 
+   
+    
     
     func writeImageToDisk(){
         let savePath = NSHomeDirectory().stringByAppendingPathComponent("Documents/userImage.png")
         if pickFromCamera{
             let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setBool(false, forKey: "imageExist")
+            defaults.setBool(true, forKey: "pickFromCamera")
         } else {
             UIImagePNGRepresentation(self.imageView?.image).writeToFile(savePath, atomically: true)
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setBool(true, forKey: "imageExist")
         }
-        
-
-        
     }
+    
+    
     func loadImageFromDisk(){
         let jpgPath = NSHomeDirectory().stringByAppendingPathComponent("Documents/userImage.png")
         self.imageView.image = UIImage(contentsOfFile: jpgPath)
-        self.pickImageButton.setImage(UIImage(contentsOfFile: jpgPath), forState: UIControlState.Normal)
+        //self.pickImageButton.setImage(UIImage(contentsOfFile: jpgPath), forState: UIControlState.Normal)
     }
             
 

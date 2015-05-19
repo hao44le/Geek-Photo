@@ -15,7 +15,12 @@
 		C04F30E71B08010D00018EC7 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04F30E61B08010D00018EC7 /* IntroViewController.swift */; };
 		C06C81001B026FEC00C27E7B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C06C80FF1B026FEC00C27E7B /* FBSDKCoreKit.framework */; };
 		C06C81041B02700F00C27E7B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C06C81031B02700F00C27E7B /* FBSDKShareKit.framework */; };
+		C06D902D1B0A24E200E13AE8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0F4137A1B0244EE0068F18C /* Security.framework */; };
+		C06D902F1B0A24EE00E13AE8 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C06D902E1B0A24EE00E13AE8 /* libiconv.dylib */; };
+		C06D90301B0A250900E13AE8 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0F413761B0244D30068F18C /* CoreTelephony.framework */; };
 		C076484A1B06E31C003261A2 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07648491B06E31C003261A2 /* CollectionViewCell.swift */; };
+		C09D3D631B0A3A32009F2A86 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C09D3D611B0A3A32009F2A86 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		C09D3D641B0A3A32009F2A86 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C09D3D621B0A3A32009F2A86 /* TencentOpenAPI.framework */; };
 		C0A679251B05328E0051BA56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0A679241B05328E0051BA56 /* Main.storyboard */; };
 		C0A679331B0543860051BA56 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C0A679321B0543860051BA56 /* libstdc++.6.dylib */; };
 		C0A679351B05438E0051BA56 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0A679341B05438E0051BA56 /* MobileCoreServices.framework */; };
@@ -80,7 +85,10 @@
 		C04F30E61B08010D00018EC7 /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		C06C80FF1B026FEC00C27E7B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		C06C81031B02700F00C27E7B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		C06D902E1B0A24EE00E13AE8 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		C07648491B06E31C003261A2 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		C09D3D611B0A3A32009F2A86 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		C09D3D621B0A3A32009F2A86 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		C0A679241B05328E0051BA56 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C0A679321B0543860051BA56 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		C0A679341B05438E0051BA56 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -153,14 +161,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0F413831B02450C0068F18C /* libstdc++.dylib in Frameworks */,
+				C06D90301B0A250900E13AE8 /* CoreTelephony.framework in Frameworks */,
+				C06D902F1B0A24EE00E13AE8 /* libiconv.dylib in Frameworks */,
+				C06D902D1B0A24E200E13AE8 /* Security.framework in Frameworks */,
 				C0A6793B1B0546AF0051BA56 /* Accounts.framework in Frameworks */,
 				C0A6793A1B0546A00051BA56 /* Social.framework in Frameworks */,
 				C0A679391B0543A20051BA56 /* libsqlite3.dylib in Frameworks */,
 				C0A679371B05439C0051BA56 /* AudioToolbox.framework in Frameworks */,
+				C09D3D641B0A3A32009F2A86 /* TencentOpenAPI.framework in Frameworks */,
 				C0A679351B05438E0051BA56 /* MobileCoreServices.framework in Frameworks */,
 				C0A679331B0543860051BA56 /* libstdc++.6.dylib in Frameworks */,
 				C0D04BBF1B043E84008040E8 /* CoreGraphics.framework in Frameworks */,
-				C0F413831B02450C0068F18C /* libstdc++.dylib in Frameworks */,
 				C0F413701B0244080068F18C /* libsqlite3.0.dylib in Frameworks */,
 				C0F4136E1B0243FF0068F18C /* libz.dylib in Frameworks */,
 				C0F4136C1B0243EC0068F18C /* SystemConfiguration.framework in Frameworks */,
@@ -184,6 +196,7 @@
 		1A6561E44D3AB1C0A903975C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C06D902E1B0A24EE00E13AE8 /* libiconv.dylib */,
 				C0A679381B0543A20051BA56 /* libsqlite3.dylib */,
 				C0A679361B05439C0051BA56 /* AudioToolbox.framework */,
 				C0A679341B05438E0051BA56 /* MobileCoreServices.framework */,
@@ -416,6 +429,8 @@
 		C0F4138D1B024B3B0068F18C /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				C09D3D611B0A3A32009F2A86 /* TencentOpenApi_IOS_Bundle.bundle */,
+				C09D3D621B0A3A32009F2A86 /* TencentOpenAPI.framework */,
 				C04F30C01B07F67600018EC7 /* EAIntroView */,
 				C0A679651B057C740051BA56 /* CCMPopup */,
 				C0D04BA71B043E1A008040E8 /* AMSmoothAlert */,
@@ -516,6 +531,7 @@
 				C0D04BB91B043E1A008040E8 /* crossMark@2x.png in Resources */,
 				C0D04BB61B043E1A008040E8 /* checkMark.png in Resources */,
 				C0D04BB81B043E1A008040E8 /* crossMark.png in Resources */,
+				C09D3D631B0A3A32009F2A86 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				C0F4133D1B0242B80068F18C /* Images.xcassets in Resources */,
 				C04F30E51B08002E00018EC7 /* LaunchScreen.xib in Resources */,
 				C0D04BB71B043E1A008040E8 /* checkMark@2x.png in Resources */,
@@ -734,6 +750,7 @@
 					"\"BKAsciiImage\"",
 					"$(inherited)",
 					"-ObjC",
+					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Geek Photo/Geek Photo-Bridging-Header.h";
@@ -764,6 +781,7 @@
 					"\"BKAsciiImage\"",
 					"$(inherited)",
 					"-ObjC",
+					"-fobjc-arc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Geek Photo/Geek Photo-Bridging-Header.h";

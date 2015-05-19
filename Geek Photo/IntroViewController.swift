@@ -66,6 +66,7 @@ class IntroViewController: UINavigationController {
         
         if (defauls.objectForKey("intro_screen_viewed") == nil) {
             showIntro()
+            writeFirstImageToDisk()
         }
         // Do any additional setup after loading the view.
     }
@@ -74,7 +75,12 @@ class IntroViewController: UINavigationController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func writeFirstImageToDisk(){
+        let savePath = NSHomeDirectory().stringByAppendingPathComponent("Documents/userImage.png")
+        UIImagePNGRepresentation(UIImage(named: "testImage.png")).writeToFile(savePath, atomically: true)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(true, forKey: "imageExist")
+    }
 
     /*
     // MARK: - Navigation

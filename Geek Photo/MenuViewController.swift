@@ -8,7 +8,7 @@
 
 import UIKit
 import Social
-class MenuViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+class MenuViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,TencentSessionDelegate,TencentLoginDelegate{
 
     var dic :UIDocumentInteractionController?
     let thumbnailImage = UIImage(named: "thumbnail.jpg")
@@ -17,6 +17,7 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
     let cellName = ["Facebook","Twitter","WeChat Moment","WeChat Friend","Sina Weibo","Tencent Weibo","Tencent QQ","Tencent Qzone"]
     override func viewDidLoad() {
          super.viewDidLoad()
+        let oath = TencentOAuth(appId: "1104573911", andDelegate: self)
         if (self.view.bounds.size.height < 420) {
             
         
@@ -125,6 +126,7 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
             }
         case 6:
             //tencent qq
+            
             shareToQQ()
         case 7:
             //tencent qzone
@@ -234,11 +236,61 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
         
 
     }
+    func tencentDidLogin(){
+    
+    }
+    func tencentDidNotLogin(canceld:Bool){
+    
+    }
+    func tencentDidLogout() {
+        
+    }
+    func tencentDidNotNetWork(){
+        
+    }
+    func responseDidReceived(response: APIResponse!, forMessage message: String!) {
+        
+    }
     func shareToQQ(){
+        
+        let savePath = NSHomeDirectory().stringByAppendingPathComponent("Documents/userImage.png")
+        let imgData = NSData(contentsOfFile: savePath)
+        let previewImageData = UIImagePNGRepresentation(self.thumbnailImage)
+        let imgObject = QQApiImageObject(data: imgData, previewImageData: previewImageData, title: "分享图片", description: "Share this image with your friend")
+        imgObject.cflag = UInt64(kQQAPICtrlFlagQQShare)
+        let req = SendMessageToQQReq(content: imgObject)
+        let sent:QQApiSendResultCode = QQApiInterface.sendReq(req)
+        handleSendResult(sent)
+        
         
     }
     func shareToQzone(){
         
+        let savePath = NSHomeDirectory().stringByAppendingPathComponent("Documents/userImage.png")
+        let imgData = NSData(contentsOfFile: savePath)
+        let previewImageData = UIImagePNGRepresentation(self.thumbnailImage)
+        let imgObject = QQApiImageObject(data: imgData, previewImageData: previewImageData, title: "分享图片", description: "Share this image with your friend")
+        imgObject.cflag = UInt64(kQQAPICtrlFlagQQShare)
+        let req = SendMessageToQQReq(content: imgObject)
+        let sent:QQApiSendResultCode = QQApiInterface.sendReq(req)
+        handleSendResult(sent)
+        
+
+    }
+    
+    func handleSendResult(sendResult:QQApiSendResultCode){
+        switch sendResult.value{
+        
+            case EQQAPIAPPNOTREGISTED.value:
+            unableToShare("Tencent")
+        case EQQAPIQQNOTINSTALLED.value:
+            unableToShare("Tencent")
+            default:
+            
+                break;
+            
+
+        }
     }
     
     func shareToInstagram(){
