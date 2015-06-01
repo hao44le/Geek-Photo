@@ -16,7 +16,7 @@ class IntroViewController: UINavigationController {
         
         let page1 = EAIntroPage()
         page1.title = "Geek Photo >>"
-        page1.desc = "Geek Photo allows you to convert any image into code. Like the image you saw in movie Matrix"
+        page1.desc = "Geek Photo allows you to convert any image into code. It's very cool"
         page1.titleFont = UIFont(name: "Georgia-BoldItalic", size: 20)
         page1.descColor = UIColor.whiteColor()
         page1.descFont = UIFont(name: "Georgia-Italic", size: 15)
@@ -25,7 +25,7 @@ class IntroViewController: UINavigationController {
         
         let page2 = EAIntroPage()
         page2.title = "For example >>"
-        page2.desc = "This is the original image from the movie matrix"
+        page2.desc = "This is the original image"
         page2.titleIconView = UIImageView(image: UIImage(named: "matrix_1_changed"))
         page2.titleFont = UIFont(name: "Georgia-BoldItalic", size: 20)
         page2.descColor = UIColor.whiteColor()
