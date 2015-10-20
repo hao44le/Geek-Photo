@@ -4,12 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-BKAsciiImage.xcscheme</key>
+		<key>BKAsciiImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-GPUImage.xcscheme</key>
+		<key>GPUImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,17 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>025FA3439B208E12A52B49B7</key>
+		<key>7BE4F02C39C439891A8BEFB2602F17F4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5E5B4BE77FA12E7C3D234E9D</key>
+		<key>E503CB7D52985B8AC9C10ED89D4A181F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A396ECFA7BE979D225E04857</key>
+		<key>EA0DD8ED489933744D70DD4A9719ED01</key>
 		<dict>
 			<key>primary</key>
 			<true/>

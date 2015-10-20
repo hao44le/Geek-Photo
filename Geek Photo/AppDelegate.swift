@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        WXApi.registerApp("wx17b2dbfd8c9e6945")
+        WXApi.registerApp("wx6d67e31185e79352")
                 // Override point for customization after application launch.
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate {
         return WXApi.handleOpenURL(url, delegate: self)
     }
 
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return TencentOAuth.HandleOpenURL(url)
     }
 

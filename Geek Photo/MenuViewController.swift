@@ -17,7 +17,7 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
     let cellName = ["Facebook","Twitter","WeChat Moment","WeChat Friend","Sina Weibo","Tencent Weibo","Tencent QQ","Tencent Qzone"]
     override func viewDidLoad() {
          super.viewDidLoad()
-        let oath = TencentOAuth(appId: "1104573911", andDelegate: self)
+        _ = TencentOAuth(appId: "1104573911", andDelegate: self)
         if (self.view.bounds.size.height < 420) {
             
         
@@ -97,7 +97,7 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
         case 2:
             //moments
             if WXApi.isWXAppInstalled() {
-                shareToWeChatTimeline()
+                //shareToWeChatTimeline()
             } else {
                 unableToShare("WeChat")
             }
@@ -105,7 +105,7 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
         case 3:
             //friend
             if WXApi.isWXAppInstalled(){
-                shareToWeChatFriend()
+                //shareToWeChatFriend()
             } else {
                 unableToShare("WeChat")
             }
@@ -162,7 +162,7 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
         let alert = AMSmoothAlertView(dropAlertWithTitle: "Sorry!", andText: "Make sure you install \(name), and log in \(name).", andCancelButton: false, forAlertType: AlertType.Failure)
         alert.show()
         let delay = 2.0 * Double(NSEC_PER_SEC)
-        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(time, dispatch_get_main_queue(), {
             alert.dismissAlertView()
         })
@@ -187,14 +187,14 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
         self.slvc!.setInitialText(string)
         self.presentViewController(slvc!, animated: true, completion: nil)
     }
-    
+    /*
     func shareToWeChatTimeline(){
-        var req = SendMessageToWXReq()
-        req.scene = Int32(WXSceneTimeline.value)
+        let req = SendMessageToWXReq()
+        req.scene = Int32(WXSceneTimeline.rawValue)
         req.bText = false
         let media = WXMediaMessage()
         let img = WXImageObject()
-        img.imageData = UIImageJPEGRepresentation(imageView!.image, 1.0)
+        img.imageData = UIImageJPEGRepresentation(imageView!.image!, 1.0)
         media.mediaObject = img
         req.message = media
         WXApi.sendReq(req)
@@ -204,20 +204,21 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
     }
     func shareToWeChatFriend(){
         var req = SendMessageToWXReq()
-        req.scene = Int32(WXSceneSession.value)
+        req.scene = Int32(WXSceneSession.rawValue)
         req.bText = false
         let media = WXMediaMessage()
         media.title = "代码图片"
         media.description = "把图片变成代码"
         media.setThumbImage(self.thumbnailImage)
         let img = WXImageObject()
-        img.imageData = UIImageJPEGRepresentation(imageView!.image, 1.0)
+        img.imageData = UIImageJPEGRepresentation(imageView!.image!, 1.0)
         media.mediaObject = img
         req.message = media
         WXApi.sendReq(req)
 
         
     }
+*/
     func shareToSinaWeibo(){
         let string = "I just create this cool code image. You can try one yourself. It's avaliable on App Store. It's called Geek Photo"
         slvc = SLComposeViewController(forServiceType: SLServiceTypeSinaWeibo)
@@ -255,12 +256,12 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
         
         let savePath = NSHomeDirectory().stringByAppendingPathComponent("Documents/userImage.png")
         let imgData = NSData(contentsOfFile: savePath)
-        let previewImageData = UIImagePNGRepresentation(self.thumbnailImage)
+        let previewImageData = UIImagePNGRepresentation(self.thumbnailImage!)
         let imgObject = QQApiImageObject(data: imgData, previewImageData: previewImageData, title: "分享图片", description: "Share this image with your friend")
         imgObject.cflag = UInt64(kQQAPICtrlFlagQQShare)
         let req = SendMessageToQQReq(content: imgObject)
         let sent:QQApiSendResultCode = QQApiInterface.sendReq(req)
-        handleSendResult(sent)
+        //handleSendResult(sent)
         
         
     }
@@ -268,22 +269,22 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
         
         let savePath = NSHomeDirectory().stringByAppendingPathComponent("Documents/userImage.png")
         let imgData = NSData(contentsOfFile: savePath)
-        let previewImageData = UIImagePNGRepresentation(self.thumbnailImage)
+        let previewImageData = UIImagePNGRepresentation(self.thumbnailImage!)
         let imgObject = QQApiImageObject(data: imgData, previewImageData: previewImageData, title: "分享图片", description: "Share this image with your friend")
         imgObject.cflag = UInt64(kQQAPICtrlFlagQQShare)
         let req = SendMessageToQQReq(content: imgObject)
         let sent:QQApiSendResultCode = QQApiInterface.sendReq(req)
-        handleSendResult(sent)
+        //rhandleSendResult(sent)
         
 
     }
-    
+    /*
     func handleSendResult(sendResult:QQApiSendResultCode){
-        switch sendResult.value{
+        switch sendResult.rawValue{
         
-            case EQQAPIAPPNOTREGISTED.value:
+            case EQQAPIAPPNOTREGISTED.rawValue:
             unableToShare("Tencent")
-        case EQQAPIQQNOTINSTALLED.value:
+        case EQQAPIQQNOTINSTALLED.rawValue:
             unableToShare("Tencent")
             default:
             
@@ -292,10 +293,10 @@ class MenuViewController: UIViewController,UICollectionViewDelegate,UICollection
 
         }
     }
-    
+    */
     func shareToInstagram(){
         let savePath = NSHomeDirectory().stringByAppendingPathComponent("Documents/Test.ig")
-        UIImagePNGRepresentation(self.imageView?.image).writeToFile(savePath, atomically: true)
+        UIImagePNGRepresentation((self.imageView?.image)!)!.writeToFile(savePath, atomically: true)
         
         let rect = CGRectMake(0, 0, 0, 0)
         let jpgPath = NSHomeDirectory().stringByAppendingPathComponent("Documents/Test.ig")

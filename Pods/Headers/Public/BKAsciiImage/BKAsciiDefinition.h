@@ -1,1 +1,0 @@
-../../../BKAsciiImage/BKAsciiImage/BKAsciiDefinition.h

@@ -1,1 +1,0 @@
-../../../BKAsciiImage/BKAsciiImage/BKAsciiConverter.h

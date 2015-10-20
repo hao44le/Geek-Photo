@@ -15,10 +15,11 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
 
 
     func introDidFinish(introView: EAIntroView!) {
-        println("finish")
+        print("finish", terminator: "")
     }
     
     
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var downView: UIView!{
         didSet{
@@ -151,7 +152,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
                 let alert = AMSmoothAlertView(dropAlertWithTitle: "Sorry!", andText: "Can not open Photo Albums", andCancelButton: false, forAlertType: AlertType.Failure)
                 alert.show()
                 let delay = 2.0 * Double(NSEC_PER_SEC)
-                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
                 dispatch_after(time, dispatch_get_main_queue(), {
                     alert.dismissAlertView()
                 })
@@ -180,7 +181,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
                 let alert = AMSmoothAlertView(dropAlertWithTitle: "Sorry!", andText: "Can not open camera", andCancelButton: false, forAlertType: AlertType.Failure)
                 alert.show()
                 let delay = 2.0 * Double(NSEC_PER_SEC)
-                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
                 dispatch_after(time, dispatch_get_main_queue(), {
                     alert.dismissAlertView()
                 })
@@ -228,8 +229,8 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    /*
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
         
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         self.imageView.image = chosenImage
@@ -238,9 +239,9 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
         //self.pickImageButton.setImage(chosenImage, forState: UIControlState.Normal)
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+    */
     func saveImage(sender: UIButton!){
-        UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, Selector("image:didFinishSavingWithError:contextInfo:"), nil)
+        UIImageWriteToSavedPhotosAlbum(self.imageView.image!, self, Selector("image:didFinishSavingWithError:contextInfo:"), nil)
         
         self.view.addSubview(overlayView)
         activityIndicator.startAnimating()
@@ -252,7 +253,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
             let alert = AMSmoothAlertView(dropAlertWithTitle: "Sorry!", andText: "\(error.debugDescription)", andCancelButton: false, forAlertType: AlertType.Failure)
             alert.show()
             let delay = 2.0 * Double(NSEC_PER_SEC)
-            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
             dispatch_after(time, dispatch_get_main_queue(), {
                 alert.dismissAlertView()
             })
@@ -260,7 +261,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
             let alert = AMSmoothAlertView(dropAlertWithTitle: "Congratulation!", andText: "The image has saved", andCancelButton: false, forAlertType: AlertType.Success)
             alert.show()
             let delay = 2.0 * Double(NSEC_PER_SEC)
-            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
             dispatch_after(time, dispatch_get_main_queue(), {
                 alert.dismissAlertView()
             })
@@ -318,7 +319,7 @@ class ASCIViewController: UIViewController,UINavigationControllerDelegate,UIImag
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setBool(true, forKey: "pickFromCamera")
         } else {
-            UIImagePNGRepresentation(self.imageView?.image).writeToFile(savePath, atomically: true)
+            UIImagePNGRepresentation((self.imageView?.image)!)!.writeToFile(savePath, atomically: true)
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setBool(true, forKey: "imageExist")
         }

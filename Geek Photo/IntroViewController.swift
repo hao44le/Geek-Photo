@@ -77,7 +77,7 @@ class IntroViewController: UINavigationController {
     }
     func writeFirstImageToDisk(){
         let savePath = NSHomeDirectory().stringByAppendingPathComponent("Documents/userImage.png")
-        UIImagePNGRepresentation(UIImage(named: "testImage.png")).writeToFile(savePath, atomically: true)
+        UIImagePNGRepresentation(UIImage(named: "testImage.png")!)!.writeToFile(savePath, atomically: true)
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setBool(true, forKey: "imageExist")
     }
